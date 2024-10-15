@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\lilsh\source\repos\GenerateurDeBalleSDL\GenerateurDeBalleSDL\main.cpp(38,16): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  GenerateurDeBalleSDL.vcxproj -> C:\Users\lilsh\source\repos\GenerateurDeBalleSDL\x64\Debug\GenerateurDeBalleSDL.exe
