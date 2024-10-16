@@ -28,13 +28,13 @@ void Text::SetText(const std::string& message) {
 
     SDL_Surface* surface = TTF_RenderText_Solid(font, message.c_str(), color);
     if (!surface) {
-        std::cerr << "Erreur lors de la création de la surface du texte : " << TTF_GetError() << std::endl;
+        std::cerr << "Erreur lors de la creation de la surface du texte : " << TTF_GetError() << std::endl;
         return;
     }
 
     texture = SDL_CreateTextureFromSurface(renderer, surface);
     if (!texture) {
-        std::cerr << "Erreur lors de la création de la texture du texte : " << SDL_GetError() << std::endl;
+        std::cerr << "Erreur lors de la creation de la texture du texte : " << SDL_GetError() << std::endl;
     }
 
     dstRect.w = surface->w;

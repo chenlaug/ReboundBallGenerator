@@ -9,6 +9,7 @@ Window::~Window() {
 }
 
 bool Window::Init() {
+
     window = SDL_CreateWindow(
         title.c_str(),                   
         SDL_WINDOWPOS_CENTERED,          
@@ -17,7 +18,7 @@ bool Window::Init() {
         SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE 
     );
 
-    if (!window) {
+    if (window == nullptr) {  
         std::cerr << "Erreur lors de la création de la fenêtre: " << SDL_GetError() << std::endl;
         return false;
     }
@@ -29,4 +30,16 @@ void Window::Clean() {
         SDL_DestroyWindow(window);
         window = nullptr;
     }
+}
+
+SDL_Window* Window::GetSDLWindow() const {
+	return window;
+}
+
+int Window::GetWidth() const {
+	return width;
+}
+
+int Window::GetHeight() const {
+	return height;
 }

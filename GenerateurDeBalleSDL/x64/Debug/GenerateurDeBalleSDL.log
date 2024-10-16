@@ -1,5 +1,5 @@
 ﻿  Game.cpp
+C:\Users\lilsh\source\repos\ReboundBallGenerator\GenerateurDeBalleSDL\Game.cpp(76,36): warning C4018: '>=': signed/unsigned mismatch
   main.cpp
-  Text.cpp
   Generating Code...
   GenerateurDeBalleSDL.vcxproj -> C:\Users\lilsh\source\repos\ReboundBallGenerator\x64\Debug\GenerateurDeBalleSDL.exe
