@@ -16,6 +16,7 @@ private:
 	Renderer renderer; 
 	FPSCounter fpsCounter;  
 	Text* fpsText;
+	Text* balleText;
 	Text* pauseText;  
 	bool isRunning;
 	bool isPaused;
@@ -31,6 +32,6 @@ public:
 	~Game();
 	void Init();
 	void Run();
-	void Clenup();
+	void CleanUp();
 };
 

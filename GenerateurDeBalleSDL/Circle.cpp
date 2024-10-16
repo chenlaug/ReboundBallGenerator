@@ -22,7 +22,7 @@ void Circle::SetRandomColor() {
              255 };  
 }
 
-void Circle::Move() {
+void Circle::Move(int windowWidth, int windowHeight) {
     x += speedX;
     y += speedY;
 

@@ -19,7 +19,7 @@ private:
 public:
 	Circle(int winW, int winH, CircleType circleType = FILLED);
 
-	void Move();  
+	void Move(int windowWidth, int windowHeight);  
 	void Draw(SDL_Renderer* renderer);  
 	bool CheckCollision(const Circle& other) const;  
 	void HandleCollision(Circle& other); 

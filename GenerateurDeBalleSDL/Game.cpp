@@ -4,17 +4,18 @@
 #include <iostream>
 
 Game::Game()
-	: window("Balle", 800, 600),
+	: window("Balle", 1200, 600),
 	renderer(window),
 	fpsCounter(60),
 	fpsText(nullptr),
 	pauseText(nullptr),
+	balleText(nullptr),
 	isRunning(true), isPaused(false), isFullWindow(false),
 	lastSpawnTime(0),
 	spawnDelay(1000) {}
 
 Game::~Game() {
-	Clenup();
+	CleanUp();
 }
 
 void Game::Init() {
@@ -53,8 +54,13 @@ void Game::Init() {
 		isRunning = false;
 	}
 	pauseText->SetText("Pause");
-	srand(static_cast<unsigned int>(time(nullptr)));  
+	srand(static_cast<unsigned int>(time(nullptr)));
 
+	balleText = new Text(renderer.GetSDLRenderer(), "../Font/Roboto-Medium.ttf", 24, white);
+	if (!balleText) {
+		std::cerr << "Erreur lors du chargement de la police." << std::endl;
+		isRunning = false;
+	}
 }
 
 
@@ -62,13 +68,14 @@ void Game::Run() {
 	Init();
 
 	while (isRunning) {
-		eventHandler.HandleEvents(isRunning, isPaused, isFullWindow, window.GetSDLWindow());
+		eventHandler.HandleEvents(isRunning, isPaused, isFullWindow, &window, renderer.GetSDLRenderer());
 
 		renderer.Clear();
 
+		int windowWidth = window.GetWidth();
+		int windowHeight = window.GetHeight();
+
 		if (isPaused) {
-			int windowWidth = window.GetWidth();
-			int windowHeight = window.GetHeight();
 			pauseText->Render(windowWidth / 2 - 50, windowHeight / 2 - 25);
 		}
 		else {
@@ -80,7 +87,7 @@ void Game::Run() {
 			}
 
 			for (auto& circle : circles) {
-				circle.Move();
+				circle.Move(windowWidth, windowHeight);
 				circle.Draw(renderer.GetSDLRenderer());
 			}
 
@@ -90,35 +97,46 @@ void Game::Run() {
 						circles[i].HandleCollision(circles[j]);
 					}
 				}
+
 			}
 
 			fpsCounter.Update();
 			float fps = fpsCounter.GetFPS();
 			fpsText->SetText("FPS: " + std::to_string(static_cast<int>(fps)));
 			fpsText->Render(10, 10);
+
+			balleText->SetText("balle nb : " + std::to_string(circles.size()));
+			balleText->Render(10, 50);
 		}
 
 		renderer.Present();
-		fpsCounter.LimitFPS();
+	//	fpsCounter.LimitFPS();
 	}
 
-	Clenup();
+	CleanUp();
 }
 
 
 
-void Game::Clenup() {
+void Game::CleanUp() {
 	if (fpsText) {
 		delete fpsText;
 		fpsText = nullptr;
 	}
+
 	if (pauseText) {
 		delete pauseText;
 		pauseText = nullptr;
 	}
 
+	if (balleText) {
+		delete balleText;
+		balleText = nullptr;
+	}
+
 	window.Clean();
 	renderer.Clear();
+	
 
 	TTF_Quit();
 	SDL_Quit();

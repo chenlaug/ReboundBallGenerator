@@ -16,6 +16,8 @@ public:
 	void Clean();
 	SDL_Window* GetSDLWindow() const;
 	int GetWidth() const;
+	void SetWidth(int newWidth);
 	int GetHeight() const;
+	void SetHeight(int newHeight);
 };
 

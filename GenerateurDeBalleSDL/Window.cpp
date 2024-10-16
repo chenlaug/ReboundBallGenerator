@@ -40,6 +40,16 @@ int Window::GetWidth() const {
 	return width;
 }
 
+void Window::SetWidth(int newWidth)
+{
+    width = newWidth;
+}
+
 int Window::GetHeight() const {
 	return height;
+}
+
+void Window::SetHeight(int newHeight)
+{
+    height = newHeight;
 }
