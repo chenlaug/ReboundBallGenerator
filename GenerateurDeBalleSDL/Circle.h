@@ -23,7 +23,9 @@ public:
 	void Draw(SDL_Renderer* renderer);  
 	bool CheckCollision(const Circle& other) const;  
 	void HandleCollision(Circle& other); 
-
+	int GetX() const;
+	int GetY() const;
+	int GetRadius() const;
 
 	void SetRandomColor();
 };

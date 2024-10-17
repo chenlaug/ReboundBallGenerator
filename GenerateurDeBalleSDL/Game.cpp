@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "Window.h"
 #include "Renderer.h"
+#include "Circle.h"
 #include <iostream>
 
 Game::Game()
@@ -65,9 +66,11 @@ void Game::Init() {
 
 
 void Game::Run() {
+	Uint32 frameStart;
 	Init();
 
 	while (isRunning) {
+		frameStart = SDL_GetTicks();
 		eventHandler.HandleEvents(isRunning, isPaused, isFullWindow, &window, renderer.GetSDLRenderer());
 
 		renderer.Clear();
@@ -81,8 +84,22 @@ void Game::Run() {
 		else {
 			Uint32 currentTime = SDL_GetTicks();
 			if (currentTime - lastSpawnTime >= spawnDelay) {
+				int newX, newY, newRadius;
+				bool positionFound = false;
+
+				while (!positionFound) {
+					newRadius = 10 + rand() % 20;
+					newX = newRadius + rand() % (windowWidth - 2 * newRadius);
+					newY = newRadius + rand() % (windowHeight - 2 * newRadius);
+
+					if (IsPositionFree(newX, newY, newRadius, circles)) {
+						positionFound = true;
+					}
+				}
+
 				CircleType type = (rand() % 2 == 0) ? FILLED : OUTLINE;
 				circles.emplace_back(window.GetWidth(), window.GetHeight(), type);
+
 				lastSpawnTime = currentTime;
 			}
 
@@ -97,7 +114,6 @@ void Game::Run() {
 						circles[i].HandleCollision(circles[j]);
 					}
 				}
-
 			}
 
 			fpsCounter.Update();
@@ -105,15 +121,31 @@ void Game::Run() {
 			fpsText->SetText("FPS: " + std::to_string(static_cast<int>(fps)));
 			fpsText->Render(10, 10);
 
-			balleText->SetText("balle nb : " + std::to_string(circles.size()));
+			balleText->SetText("Nombre de balle: " + std::to_string(circles.size()));
 			balleText->Render(10, 50);
 		}
 
 		renderer.Present();
-	//	fpsCounter.LimitFPS();
+		fpsCounter.LimitFPS(frameStart);
 	}
 
 	CleanUp();
+}
+
+
+bool Game::IsPositionFree(int newX, int newY, int newRadius, const std::vector<Circle>& circles)
+{
+	for (const auto& circle : circles) {
+		int distX = newX - circle.GetX();
+		int distY = newY - circle.GetY();
+		int distanceSquared = distX * distX + distY * distY;
+		int combinedRadius = newRadius + circle.GetRadius();
+
+		if (distanceSquared < combinedRadius * combinedRadius) {
+			return false;
+		}
+	}
+	return true;
 }
 
 
@@ -136,9 +168,10 @@ void Game::CleanUp() {
 
 	window.Clean();
 	renderer.Clear();
-	
+
 
 	TTF_Quit();
 	SDL_Quit();
 	window.Clean();
 }
+

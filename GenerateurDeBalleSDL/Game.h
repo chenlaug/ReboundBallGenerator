@@ -33,5 +33,7 @@ public:
 	void Init();
 	void Run();
 	void CleanUp();
+	bool IsPositionFree(int newX, int newY, int newRadius, const std::vector<Circle>& circles);
+
 };
 

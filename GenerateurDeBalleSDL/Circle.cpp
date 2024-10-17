@@ -4,13 +4,17 @@
 
 Circle::Circle(int winW, int winH, CircleType circleType)
     : windowWidth(winW), windowHeight(winH), type(circleType) {
-    x = rand() % winW;
-    y = rand() % winH;
 
-    radius = 10 + rand() % 20;
+    radius = 10 + rand() % 20; 
 
-    speedX = -5 + rand() % 11;
-    speedY = -5 + rand() % 11;
+    x = radius + rand() % (winW - 2 * radius);
+    y = radius + rand() % (winH - 2 * radius);
+
+    speedX = (rand() % 11) - 5;  
+    speedY = (rand() % 11) - 5;
+
+    speedX = (speedX == 0) ? ((rand() % 2 == 0) ? 1 : -1) : speedX;
+    speedY = (speedY == 0) ? ((rand() % 2 == 0) ? 1 : -1) : speedY;
 
     SetRandomColor();
 }
@@ -26,13 +30,38 @@ void Circle::Move(int windowWidth, int windowHeight) {
     x += speedX;
     y += speedY;
 
-    if (x - radius <= 0 || x + radius >= windowWidth) {
+    if (x - radius < 0 || x + radius > windowWidth) {
         speedX = -speedX;
+        if (x - radius < 0) {
+            x = radius;  
+        }
+        else if (x + radius > windowWidth) {
+            x = windowWidth - radius;  
+        }
     }
-    if (y - radius <= 0 || y + radius >= windowHeight) {
+
+    if (y - radius < 0 || y + radius > windowHeight) {
         speedY = -speedY;
+        if (y - radius < 0) {
+            y = radius;  
+        }
+        else if (y + radius > windowHeight) {
+            y = windowHeight - radius;  
+        }
     }
+
+	// version plus simple avec std::clamp
+    //if (x - radius < 0 || x + radius > windowWidth) {
+    //    speedX = -speedX;
+    //    x = std::clamp(x, radius, windowWidth - radius); 
+
+    //if (y - radius < 0 || y + radius > windowHeight) {
+    //    speedY = -speedY;
+    //    y = std::clamp(y, radius, windowHeight - radius);  
+    //}
 }
+
+
 
 void Circle::Draw(SDL_Renderer* renderer) {
     SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
@@ -84,11 +113,40 @@ void Circle::Draw(SDL_Renderer* renderer) {
 bool Circle::CheckCollision(const Circle& other) const {
     int distX = x - other.x;
     int distY = y - other.y;
-    int distance = sqrt(distX * distX + distY * distY);
-    return distance <= (radius + other.radius);
+    int distanceSquared = distX * distX + distY * distY;
+    int radiusSum = radius + other.radius;
+    return distanceSquared <= radiusSum * radiusSum;
 }
+
 
 void Circle::HandleCollision(Circle& other) {
     std::swap(speedX, other.speedX);
     std::swap(speedY, other.speedY);
+
+    int distX = x - other.x;
+    int distY = y - other.y;
+    int distance = sqrt(distX * distX + distY * distY);
+
+    if (distance < radius + other.radius) {
+        int overlap = radius + other.radius - distance;
+        int moveX = (distX * overlap) / distance / 2;
+        int moveY = (distY * overlap) / distance / 2;
+
+        x += moveX;
+        y += moveY;
+        other.x -= moveX;
+        other.y -= moveY;
+    }
+}
+
+int Circle::GetX() const {
+	return x;
+}
+
+int Circle::GetY() const {
+	return y;
+}
+
+int Circle::GetRadius() const {
+	return radius;
 }

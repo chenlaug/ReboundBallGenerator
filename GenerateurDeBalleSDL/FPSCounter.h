@@ -15,6 +15,6 @@ public:
     void Start();         
     void Update();
     float GetFPS() const;  
-    void LimitFPS();
+    void LimitFPS(Uint32 frameStart);
 };
 

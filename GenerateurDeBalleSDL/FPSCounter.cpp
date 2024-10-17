@@ -24,14 +24,11 @@ float FPSCounter::GetFPS() const {
     return currentFPS; 
 }
 
-void FPSCounter::LimitFPS() {
-    Uint32 frameStart = SDL_GetTicks(); 
-
-
+void FPSCounter::LimitFPS(Uint32 frameStart) {
     Uint32 frameTime = SDL_GetTicks() - frameStart;
 
-   
     if (frameTime < frameDelay) {
-        SDL_Delay(frameDelay - frameTime);
+        SDL_Delay(frameDelay - frameTime);  
     }
 }
+
