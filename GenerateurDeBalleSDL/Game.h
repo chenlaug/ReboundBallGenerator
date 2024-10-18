@@ -26,7 +26,6 @@ private:
 	Uint32 lastSpawnTime;
 	Uint32 spawnDelay;
 
-
 public:
 	Game();
 	~Game();
@@ -34,6 +33,8 @@ public:
 	void Run();
 	void CleanUp();
 	void Print();
+	void Max(int MaxBall);
+	void bouncing(int  windowWidth, int windowHeight);
 	bool IsPositionFree(int newX, int newY, int newRadius, const std::vector<Circle>& circles);
 };
 

@@ -30,7 +30,6 @@ void Circle::Move(int windowWidth, int windowHeight) {
 	x += speedX;
 	y += speedY;
 
-	// verion plus clc en sah elle date dieu merci on a la verion 20 de c++ :^>
 	//if (x - radius < 0 || x + radius > windowWidth) {
 	//	speedX = -speedX;
 	//	if (x - radius < 0) {
@@ -40,7 +39,7 @@ void Circle::Move(int windowWidth, int windowHeight) {
 	//		x = windowWidth - radius;
 	//	}
 	//}
-
+	//
 	//if (y - radius < 0 || y + radius > windowHeight) {
 	//	speedY = -speedY;
 	//	if (y - radius < 0) {

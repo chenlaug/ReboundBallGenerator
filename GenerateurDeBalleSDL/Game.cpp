@@ -100,24 +100,12 @@ void Game::Run() {
 					}
 				}
 
-				CircleType type = (rand() % 2 == 0) ? FILLED : OUTLINE;
-				circles.emplace_back(window.GetWidth(), window.GetHeight(), type);
+				Max(MAX_BALL);
 
 				lastSpawnTime = currentTime;
 			}
 
-			for (auto& circle : circles) {
-				circle.Move(windowWidth, windowHeight);
-				circle.Draw(renderer.GetSDLRenderer());
-			}
-
-			for (size_t i = 0; i < circles.size(); i++) {
-				for (size_t j = i + 1; j < circles.size(); j++) {
-					if (circles[i].CheckCollision(circles[j])) {
-						circles[i].HandleCollision(circles[j]);
-					}
-				}
-			}
+			bouncing(windowWidth, windowHeight);
 
 			Print();
 		}
@@ -132,7 +120,7 @@ void Game::Run() {
 
 bool Game::IsPositionFree(int newX, int newY, int newRadius, const std::vector<Circle>& circles)
 {
-	for (const auto& circle : circles) {
+	for (const Circle& circle : circles) {
 		int distX = newX - circle.GetX();
 		int distY = newY - circle.GetY();
 		int distanceSquared = distX * distX + distY * distY;
@@ -145,7 +133,42 @@ bool Game::IsPositionFree(int newX, int newY, int newRadius, const std::vector<C
 	return true;
 }
 
+void Game::Print()
+{
+	fpsCounter.Update();
+	float fps = fpsCounter.GetFPS();
+	fpsText->SetText("FPS: " + std::to_string(static_cast<int>(fps)));
+	fpsText->Render(10, 10);
 
+	balleText->SetText("Nombre de balle: " + std::to_string(circles.size()));
+	balleText->Render(10, 50);
+}
+
+void Game::Max(int MaxBall)
+{
+
+	if (circles.size() < MaxBall)
+	{
+		CircleType type = (rand() % 2 == 0) ? FILLED : OUTLINE;
+		circles.emplace_back(window.GetWidth(), window.GetHeight(), type);
+	}
+}
+
+void Game::bouncing(int  windowWidth, int windowHeight)
+{
+	for (Circle& circle : circles) {
+		circle.Move(windowWidth, windowHeight);
+		circle.Draw(renderer.GetSDLRenderer());
+	}
+
+	for (size_t i = 0; i < circles.size(); i++) {
+		for (size_t j = i + 1; j < circles.size(); j++) {
+			if (circles[i].CheckCollision(circles[j])) {
+				circles[i].HandleCollision(circles[j]);
+			}
+		}
+	}
+}
 
 void Game::CleanUp() {
 	if (fpsText) {
@@ -171,15 +194,3 @@ void Game::CleanUp() {
 	SDL_Quit();
 	window.Clean();
 }
-
-void Game::Print()
-{
-	fpsCounter.Update();
-	float fps = fpsCounter.GetFPS();
-	fpsText->SetText("FPS: " + std::to_string(static_cast<int>(fps)));
-	fpsText->Render(10, 10);
-
-	balleText->SetText("Nombre de balle: " + std::to_string(circles.size()));
-	balleText->Render(10, 50);
-}
-

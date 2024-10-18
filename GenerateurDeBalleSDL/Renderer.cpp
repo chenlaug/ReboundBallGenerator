@@ -20,8 +20,9 @@ bool Renderer::Init(Window& window) {
 }
 
 void Renderer::Clear() {
-	auto white = SDL_Color{ 255, 255, 255, 255 };
-	auto black = SDL_Color{ 0, 0, 0, 255 };
+	SDL_Color white = { 255, 255, 255, 255 }; 
+	SDL_Color black = { 0, 0, 0, 255 };      
+
 
 
 	if (DARK_MODE) {
