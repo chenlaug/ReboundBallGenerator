@@ -43,14 +43,14 @@ void Game::Init() {
 
 	fpsCounter.Start();
 	SDL_Color white = { 255,255,255,255 };
-	fpsText = new Text(renderer.GetSDLRenderer(), "../Font/Roboto-Medium.ttf", 24, white);
+	fpsText = new Text(renderer.GetSDLRenderer(), way, 24, white);
 	if (!fpsText) {
 		std::cerr << "Erreur lors du chargement de la police." << std::endl;
 		isRunning = false;
 	}
 	fpsText->SetText("FPS: 0");
 
-	pauseText = new Text(renderer.GetSDLRenderer(), "../Font/Roboto-Medium.ttf", 48, white);
+	pauseText = new Text(renderer.GetSDLRenderer(), way, 48, white);
 	if (!pauseText) {
 		std::cerr << "Erreur lors du chargement de la police." << std::endl;
 		isRunning = false;
@@ -58,7 +58,7 @@ void Game::Init() {
 	pauseText->SetText("Pause");
 	srand(static_cast<unsigned int>(time(nullptr)));
 
-	balleText = new Text(renderer.GetSDLRenderer(), "../Font/Roboto-Medium.ttf", 24, white);
+	balleText = new Text(renderer.GetSDLRenderer(), way, 24, white);
 	if (!balleText) {
 		std::cerr << "Erreur lors du chargement de la police." << std::endl;
 		isRunning = false;
