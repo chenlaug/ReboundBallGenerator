@@ -42,7 +42,7 @@ void Game::Init() {
 	}
 
 	fpsCounter.Start();
-	SDL_Color white = { 255, 255, 255, 255 };
+	SDL_Color white = { 255,255,255,255 };
 	fpsText = new Text(renderer.GetSDLRenderer(), "../Font/Roboto-Medium.ttf", 24, white);
 	if (!fpsText) {
 		std::cerr << "Erreur lors du chargement de la police." << std::endl;
