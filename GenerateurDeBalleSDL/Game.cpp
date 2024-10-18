@@ -119,13 +119,7 @@ void Game::Run() {
 				}
 			}
 
-			fpsCounter.Update();
-			float fps = fpsCounter.GetFPS();
-			fpsText->SetText("FPS: " + std::to_string(static_cast<int>(fps)));
-			fpsText->Render(10, 10);
-
-			balleText->SetText("Nombre de balle: " + std::to_string(circles.size()));
-			balleText->Render(10, 50);
+			Print();
 		}
 
 		renderer.Present();
@@ -176,5 +170,16 @@ void Game::CleanUp() {
 	TTF_Quit();
 	SDL_Quit();
 	window.Clean();
+}
+
+void Game::Print()
+{
+	fpsCounter.Update();
+	float fps = fpsCounter.GetFPS();
+	fpsText->SetText("FPS: " + std::to_string(static_cast<int>(fps)));
+	fpsText->Render(10, 10);
+
+	balleText->SetText("Nombre de balle: " + std::to_string(circles.size()));
+	balleText->Render(10, 50);
 }
 

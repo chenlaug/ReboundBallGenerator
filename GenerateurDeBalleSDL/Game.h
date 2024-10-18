@@ -13,17 +13,17 @@ class Game
 private:
 	Window window;
 	Event eventHandler;
-	Renderer renderer; 
-	FPSCounter fpsCounter;  
+	Renderer renderer;
+	FPSCounter fpsCounter;
 	Text* fpsText;
 	Text* balleText;
-	Text* pauseText;  
+	Text* pauseText;
 	bool isRunning;
 	bool isPaused;
 	bool isFullWindow;
 
-	std::vector<Circle> circles; 
-	Uint32 lastSpawnTime;         
+	std::vector<Circle> circles;
+	Uint32 lastSpawnTime;
 	Uint32 spawnDelay;
 
 
@@ -33,7 +33,7 @@ public:
 	void Init();
 	void Run();
 	void CleanUp();
+	void Print();
 	bool IsPositionFree(int newX, int newY, int newRadius, const std::vector<Circle>& circles);
-
 };
 
