@@ -159,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Circle.h" />
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="FPSCounter.h" />
     <ClInclude Include="Game.h" />

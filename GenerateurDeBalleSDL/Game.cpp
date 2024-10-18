@@ -3,17 +3,18 @@
 #include "Renderer.h"
 #include "Circle.h"
 #include <iostream>
+#include "Constants.h"
 
 Game::Game()
-	: window("Balle", 1200, 600),
+	: window(WINDOW_NAME, WINDOW_SIZE_X, WINDOW_SIZE_Y),
 	renderer(window),
-	fpsCounter(60),
+	fpsCounter(LIMIT_FPS),
 	fpsText(nullptr),
 	pauseText(nullptr),
 	balleText(nullptr),
-	isRunning(true), isPaused(false), isFullWindow(false),
-	lastSpawnTime(0),
-	spawnDelay(1000) {}
+	isRunning(IS_RUNNING), isPaused(IS_PAUSED), isFullWindow(IS_FULL_WINDOW),
+	lastSpawnTime(LAST_SPAWN_TIME),
+	spawnDelay(SPAWN_DELAY) {}
 
 Game::~Game() {
 	CleanUp();
@@ -83,7 +84,7 @@ void Game::Run() {
 		}
 		else {
 			Uint32 currentTime = SDL_GetTicks();
-			if (currentTime - lastSpawnTime >= spawnDelay) {
+			if ((currentTime - lastSpawnTime) >= spawnDelay) {
 				int newX, newY, newRadius;
 				bool positionFound = false;
 

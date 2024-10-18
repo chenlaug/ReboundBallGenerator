@@ -24,7 +24,7 @@ private:
 
 	std::vector<Circle> circles; 
 	Uint32 lastSpawnTime;         
-	int spawnDelay;
+	Uint32 spawnDelay;
 
 
 public:

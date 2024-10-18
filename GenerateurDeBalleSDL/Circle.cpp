@@ -26,11 +26,11 @@ void Circle::SetRandomColor() {
 			 255 };
 }
 
-  // make ball throuhgt the screen
 void Circle::Move(int windowWidth, int windowHeight) {
 	x += speedX;
 	y += speedY;
 
+	// verion plus clc en sah elle date dieu merci on a la verion 20 de c++ :^>
 	//if (x - radius < 0 || x + radius > windowWidth) {
 	//	speedX = -speedX;
 	//	if (x - radius < 0) {
@@ -62,8 +62,6 @@ void Circle::Move(int windowWidth, int windowHeight) {
 		y = std::clamp(y, radius, windowHeight - radius);
 	}
 }
-
-
 
 void Circle::Draw(SDL_Renderer* renderer) {
 	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
@@ -120,7 +118,6 @@ bool Circle::CheckCollision(const Circle& other) const {
 	int radiusSum = radius + other.radius;
 	return distanceSquared <= radiusSum * radiusSum;
 }
-
 
 void Circle::HandleCollision(Circle& other) {
 	std::swap(speedX, other.speedX);
