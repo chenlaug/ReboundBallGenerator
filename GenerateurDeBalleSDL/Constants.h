@@ -3,7 +3,7 @@
 #pragma once
 
 // Paramètre de la fenêtre Windows
-const std::string WINDOW_NAME = "Balle";
+const std::string WINDOW_NAME = "Rebond Ball Generator";
 const int WINDOW_SIZE_X = 1600;
 const int WINDOW_SIZE_Y = 900;
 
