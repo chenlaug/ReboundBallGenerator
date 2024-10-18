@@ -1,3 +1,1 @@
-﻿  Game.cpp
-C:\Users\lchenevot\Documents\GitHub\ReboundBallGenerator\GenerateurDeBalleSDL\Game.cpp(86,36): warning C4018: '>=' : incompatibilité signed/unsigned
-  GenerateurDeBalleSDL.vcxproj -> C:\Users\lchenevot\Documents\GitHub\ReboundBallGenerator\x64\Debug\GenerateurDeBalleSDL.exe
+﻿  GenerateurDeBalleSDL.vcxproj -> C:\Users\lchenevot\Documents\GitHub\ReboundBallGenerator\x64\Debug\GenerateurDeBalleSDL.exe

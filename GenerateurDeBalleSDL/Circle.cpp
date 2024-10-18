@@ -26,39 +26,41 @@ void Circle::SetRandomColor() {
 			 255 };
 }
 
+  // make ball throuhgt the screen
 void Circle::Move(int windowWidth, int windowHeight) {
 	x += speedX;
 	y += speedY;
 
+	//if (x - radius < 0 || x + radius > windowWidth) {
+	//	speedX = -speedX;
+	//	if (x - radius < 0) {
+	//		x = radius;
+	//	}
+	//	else if (x + radius > windowWidth) {
+	//		x = windowWidth - radius;
+	//	}
+	//}
+
+	//if (y - radius < 0 || y + radius > windowHeight) {
+	//	speedY = -speedY;
+	//	if (y - radius < 0) {
+	//		y = radius;
+	//	}
+	//	else if (y + radius > windowHeight) {
+	//		y = windowHeight - radius;
+	//	}
+	//}
+
+	// version plus simple avec std::clamp
 	if (x - radius < 0 || x + radius > windowWidth) {
 		speedX = -speedX;
-		if (x - radius < 0) {
-			x = radius;
-		}
-		else if (x + radius > windowWidth) {
-			x = windowWidth - radius;
-		}
+		x = std::clamp(x, radius, windowWidth - radius);
 	}
 
 	if (y - radius < 0 || y + radius > windowHeight) {
 		speedY = -speedY;
-		if (y - radius < 0) {
-			y = radius;
-		}
-		else if (y + radius > windowHeight) {
-			y = windowHeight - radius;
-		}
+		y = std::clamp(y, radius, windowHeight - radius);
 	}
-
-	// version plus simple avec std::clamp
-	//if (x - radius < 0 || x + radius > windowWidth) {
-	//    speedX = -speedX;
-	//    x = std::clamp(x, radius, windowWidth - radius); 
-
-	//if (y - radius < 0 || y + radius > windowHeight) {
-	//    speedY = -speedY;
-	//    y = std::clamp(y, radius, windowHeight - radius);  
-	//}
 }
 
 
