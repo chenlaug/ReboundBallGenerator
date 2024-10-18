@@ -1,6 +1,12 @@
-﻿  Generating code
-  0 of 113 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  GenerateurDeBalleSDL.vcxproj -> C:\Users\lilsh\source\repos\ReboundBallGenerator\x64\Release\GenerateurDeBalleSDL.exe
+﻿  Circle.cpp
+C:\Users\lchenevot\Documents\GitHub\ReboundBallGenerator\GenerateurDeBalleSDL\Circle.cpp(57,12): error C2039: 'clamp' n'est pas membre de 'std'
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\algorithm(258,1):
+      voir la déclaration de 'std'
+  
+C:\Users\lchenevot\Documents\GitHub\ReboundBallGenerator\GenerateurDeBalleSDL\Circle.cpp(57,12): error C3861: 'clamp' : identificateur introuvable
+C:\Users\lchenevot\Documents\GitHub\ReboundBallGenerator\GenerateurDeBalleSDL\Circle.cpp(62,12): error C2039: 'clamp' n'est pas membre de 'std'
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\algorithm(258,1):
+      voir la déclaration de 'std'
+  
+C:\Users\lchenevot\Documents\GitHub\ReboundBallGenerator\GenerateurDeBalleSDL\Circle.cpp(62,12): error C3861: 'clamp' : identificateur introuvable
+C:\Users\lchenevot\Documents\GitHub\ReboundBallGenerator\GenerateurDeBalleSDL\Circle.cpp(128,15): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données

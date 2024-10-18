@@ -1,4 +1,5 @@
 #include "Renderer.h"
+#include "Constants.h"
 #include <iostream>
 
 
@@ -19,7 +20,16 @@ bool Renderer::Init(Window& window) {
 }
 
 void Renderer::Clear() {
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	auto white = SDL_Color{ 255, 255, 255, 255 };
+	auto black = SDL_Color{ 0, 0, 0, 255 };
+
+
+	if (DARK_MODE) {
+		SDL_SetRenderDrawColor(renderer, black.r, black.g, black.b, black.a); // Noir
+	}
+	else {
+		SDL_SetRenderDrawColor(renderer, white.r, white.g, white.b, white.a); // Blanc
+	}
 	SDL_RenderClear(renderer);
 }
 

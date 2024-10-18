@@ -16,3 +16,4 @@ const bool IS_FULL_WINDOW = false;
 const int LIMIT_FPS = 60;
 const int SPAWN_DELAY = 1000;
 const int LAST_SPAWN_TIME = 0;
+const bool DARK_MODE = true; 
