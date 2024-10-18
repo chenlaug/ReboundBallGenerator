@@ -45,14 +45,14 @@ void Game::Init() {
 	SDL_Color white = { 255,255,255,255 };
 	SDL_Color black = { 0,0,0,255 };
 
-	fpsText = new Text(renderer.GetSDLRenderer(), way, 24, DARK_MODE ? white : black);
+	fpsText = new Text(renderer.GetSDLRenderer(), PATH, 24, DARK_MODE ? white : black);
 	if (!fpsText) {
 		std::cerr << "Erreur lors du chargement de la police." << std::endl;
 		isRunning = false;
 	}
 	fpsText->SetText("FPS: 0");
 
-	pauseText = new Text(renderer.GetSDLRenderer(), way, 48, DARK_MODE ? white : black);
+	pauseText = new Text(renderer.GetSDLRenderer(), PATH, 48, DARK_MODE ? white : black);
 	if (!pauseText) {
 		std::cerr << "Erreur lors du chargement de la police." << std::endl;
 		isRunning = false;
@@ -60,7 +60,7 @@ void Game::Init() {
 	pauseText->SetText("Pause");
 	srand(static_cast<unsigned int>(time(nullptr)));
 
-	balleText = new Text(renderer.GetSDLRenderer(), way, 24, DARK_MODE ? white : black);
+	balleText = new Text(renderer.GetSDLRenderer(), PATH, 24, DARK_MODE ? white : black);
 	if (!balleText) {
 		std::cerr << "Erreur lors du chargement de la police." << std::endl;
 		isRunning = false;
